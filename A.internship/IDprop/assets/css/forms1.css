@@ -1,0 +1,42 @@
+<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+<style type="text/css">
+.form-style-1{
+
+       button{/*font-family:  Helvetica;*/}
+        label
+        {
+          /* 
+            font-family:  Helvetica;*/
+            color:#888888;
+            font-size: 16px;
+        }
+        select:focus{
+            border-color: #888888 !important;
+            box-shadow:none !important;
+         /* box-shadow: inset 0 1px 1px #5b5b5b, 0 0 8px #495057 !important;*/
+        }
+        .form-control:focus {
+          border-color: #888888 ;
+          /*box-shadow: inset 0 1px 1px #5b5b5b, 0 0 8px #495057 ;*/
+          box-shadow:none;
+        }
+        /* Works on Chrome, Edge, and Safari */
+        *::-webkit-scrollbar {
+          width: 15px;
+        }
+        /* Works on Other browsers */
+        *::-webkit-scrollbar-track {
+          background: #888888;
+        }
+
+        *::-webkit-scrollbar-thumb {
+          background-color: #5b5b5b;
+          border: 3px solid grey;
+        }
+        h3,h4,h5
+        {
+            color: #5b5b5b;
+            font-weight: 520;
+        }
+       
+    </style>

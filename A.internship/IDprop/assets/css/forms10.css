@@ -1,0 +1,421 @@
+<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+<style type="text/css">
+.form-style-10{
+    width:450px;
+    padding:30px;
+/*    margin:40px auto;*/
+    background: #FFF;
+    border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+}
+.form-style-10 .inner-wrap{
+    padding: 30px;
+    background: #F8F8F8;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+.form-style-10 h1{
+    background: #1b0b33;
+    padding: 20px 30px 15px 30px;
+    margin: -30px -30px 30px -30px;
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #257C9E;
+}
+.form-style-10 h1 > span{
+    display: block;
+    margin-top: 2px;
+    font: 13px Arial, Helvetica, sans-serif;
+}
+.form-style-10 label{
+    display: block;
+    font: 13px Arial, Helvetica, sans-serif;
+    color: #888;
+    margin-bottom: 1%;
+}
+.form-style-10 input[type="text"],
+.form-style-10 input[type="date"],
+.form-style-10 input[type="datetime"],
+.form-style-10 input[type="email"],
+.form-style-10 input[type="number"],
+.form-style-10 input[type="search"],
+.form-style-10 input[type="time"],
+.form-style-10 input[type="url"],
+.form-style-10 input[type="password"],
+.form-style-10 textarea,
+.form-style-10 select {
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 5%;
+    /*padding: 8px;*/
+    border-radius: 8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    /*border: 2px solid #fff;*/
+
+    box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+    -moz-box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+    -webkit-box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+}
+
+.form-style-10 .section{
+    font: normal 20px 'Bitter', serif;
+    color: #2A88AD;
+    margin-bottom: 15px;
+}
+.form-style-10 .section span {
+ /*   background: #1b0b33;
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border: 4px solid #fff;
+    font-size: 14px;
+    margin-left: -45px;
+    color: #fff;
+    margin-top: -3px;*/
+}
+.form-style-10 input[type="button"],
+.form-style-10 input[type="submit"]{
+    background: #1b0b33;
+    padding: 8px 20px 8px 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+/*    border: 1px solid #257C9E;*/
+    font-size: 15px;
+}
+.form-style-10 input[type="button"]:hover,
+.form-style-10 input[type="submit"]:hover{
+    background: #2A6881;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+.form-style-10 .privacy-policy{
+    float: right;
+    width: 250px;
+    font: 12px Arial, Helvetica, sans-serif;
+    color: #4D4D4D;
+    margin-top: 10px;
+    text-align: right;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.modal{
+    padding: 1% 1%;
+    margin-top: 5%;
+    border: none;
+    box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    outline: none;
+    border-radius: 10px;
+}
+
+
+
+
+#tenantLeadsPage,#invoiceRecurringPage,#invoiceTemplatePage{
+   background:rgba(242, 242, 242,1);
+}
+.invo_input,.TL_input,.invo_select,.TL_select,.TL_textarea,.Intem_input,.intem_select,.intem_textarea{
+   padding: 1.5% 1%;
+    border: none;
+  /*box-shadow: inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;*/
+    outline: none;
+    transition: all ease 0.5s;
+    /*background-color: transparent;*/
+}
+.Intem_input:focus,.TL_textarea:focus,.invo_input:focus,.invo_select:focus,.TL_input:focus,.TL_select:focus,.intem_select:focus,.intem_textarea:focus{
+    border-radius: 1px !important;
+}
+.TL_textarea,.intem_textarea{
+    resize: vertical !important;
+}
+.TL_btn,.invo_btn,.intem_btn{
+    padding: 1% 2.5%;
+    border:1px solid rgb(222, 222, 222);
+    border-radius: 5px;
+    margin-left: 1%;
+  transition: all ease 0.5s;
+}
+.invo_select,.TL_select,.intem_select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 25px) calc(1em + 6px),
+    calc(100% - 20px) calc(1em + 6px),
+    calc(100% - 3.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 2em;
+  background-repeat: no-repeat;
+  background-color: white !important;
+}
+.invo_input,.invo_select,.TL_input,.TL_select,.Intem_input,.intem_select{
+       padding: 3.5% 4.5%;
+}
+.TL_label,.Invo_label,.intem_label{
+    font-size: 15px !important;
+}
+#labels,#label2{
+    float: left;
+}
+
+input[type="invoiceNumber"],input[type="emailCC"]{
+  border-radius: 5px;
+  padding: 3.5% 3%;
+      box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+    -moz-box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+    -webkit-box-shadow:inset 2px 2px 5px #babecc,inset -5px -5px 10px #ffffff73;
+}
+
+input[type="checkbox"]{
+    margin-right: 10%;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+
+.col-md{
+    display: block;
+    float: left;
+    width: 45%; 
+    padding-left: 3%;
+}
+.col-sm{
+    display: block;
+    width: 45%; 
+    padding-left: 3%;
+}
+.close {
+/*  position: absolute;
+*/  float: right;
+  color: #000;
+  font-size: 35px;
+}
+
+.close:hover,.close:focus {
+  color: red !important;
+  cursor: pointer;
+}
+
+.form-style-10 h2{
+    text-align: center;
+    background: #1b0b33;
+    padding: 20px 30px 15px 30px;
+    margin: -12px -12px 12px -12px;
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #257C9E;
+}
+
+#table{
+      margin-left: 5%;
+      width: 90%;
+          box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.invo_btn{
+  padding:2.5% 3.5%;
+  font-size: 15px;
+  transition: all ease 0.5s;
+}
+.TL_btn:hover,.invo_btn:hover,.intem_btn:hover{
+  color: white;
+  background-color: grey;
+      box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cform{
+  margin-left: 35%;
+}
+.Invoicetem{
+margin: auto;
+width: 80%;
+margin-top: 50px;
+}
+@media only screen and (max-width: 786px) {
+
+    [class*="cform"]{
+      margin-left:0%;
+}
+  [class*="Invoicetem"]{
+    width: 100%;
+    margin:0px 0px 0px 0px;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    [class*="cform"]{
+      margin-left:0%;
+}
+  [class*="Invoicetem"]{
+    width: 100%;
+    margin:0px 0px 0px 0px;
+  }
+}
+
+#template, #type,#interval{
+padding: 5.5% 3.5%;
+}
+#c_zip,#c_country,#dated{
+padding: 4.5% 3.5%;  
+}
+#c_zip,#c_country{
+  padding: 8.5% 3.5%;  
+}
+.col-sm-4{
+  display: block;
+  float: left;
+  width: 45%; 
+  padding-left: -13%;
+}
+.dropdowns{
+  width: 30%;
+  margin-right: 1%;
+}
+
+#taxRate,#VAT,#terms{
+  padding: 4% 5%;
+}
+
+.mails{
+  width: 40%;
+  margin-left: 1%;
+}
+
+.Intem_table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.Intem_table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+.Intem_table tr:hover {
+    background-color: #7386D5;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    transition: all ease 0.5s;
+}
+.Intem_input:hover{
+  color: white;
+}
+.Intem_table th,
+.Intem_table td {
+  padding: .625em;
+  text-align: left;
+}
+
+.Intem_table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 950px) {
+  .Intem_table {
+    border: none;
+  }
+
+  .Intem_table caption {
+    font-size: 1.3em;
+  }
+  
+  .Intem_table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .Intem_table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .Intem_table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .9em;
+    text-align: right;
+  }
+  
+  .Intem_table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .Intem_table td:last-child {
+    border-bottom: 0;
+  }
+}
+td .Intem_input{
+  width: 100%;
+  font-size: .9em;
+  background-color: transparent !important;
+}
+/*.intem_select{
+ background-color: transparent !important; 
+}
+*/
+.Intem_table td{
+  border:1px solid #ddd;
+}
+</style>

@@ -1,0 +1,79 @@
+Code Snippets for front-end forms
+
+<form class="validate" method="post" action="../actions/forms/Letting_Registration.php" data-bind="visible:selectedRegistrationType() == 'new' ">
+				<div class="inner-wrap">
+				<div data-bind="visible:!foundEmail(),if:!foundEmail()">
+					<div class="form-group">
+						<label>Company Name<span style="color: #ff0000"><strong><sup>*</sup></strong></span></label>
+						<input type="text" name="company_name" id="company_name" required autocomplete="none">
+					</div>
+				</div>
+				</div>			
+				
+					
+					
+					<div data-bind="visible:userType() == 'SeniorManagement'">
+						<input type="radio" name="type" value="Letting Agent" required> Letting Agent
+						<br>
+						<input type="radio" name="type" value="Property Management" required> Property Management
+						<br>
+						<input type="radio" name="type" value="Landlord" required> Landlord
+					</div>
+					
+					<div class="col-md"><br><br>
+					<label class="intem_label"><input class="Intem_input"type="checkbox" id="automateEmails" name="automateEmails" data-bind="checked:automateEmails"  class="" data-bind="value:automateEmails">Automate Emails</label><br>
+					<label class="intem_label"><input class="Intem_input" type="checkbox" id="printLater" name="printLater" data-bind="checked:printLater" data-bind="checked:printLater">Print Later</label><br>
+					<label class="intem_label"><input class="Intem_input" type="checkbox" id="includeOutstanding" name="includeOutstanding" data-bind="checked:includeOutstanding" value="includeOutstanding">Include Outstanding</label>				
+					</div>	
+					
+					<div class="form-group">
+						<label>Salutation<span style="color: #ff0000"><strong><sup>*</sup></strong></span></label>
+						<select name="salutation3" id="salutation3" required data-bind="attr:{'disabled':landlordExists}">
+							<option value="Mr." data-bind="attr:{'checked':Salutation() == 'Mr.'}">Mr.</option>
+							<option value="Ms." data-bind="attr:{'checked':Salutation() == 'Ms.'}">Ms.</option>
+							<option value="Mrs." data-bind="attr:{'checked':Salutation() == 'Mrs.'}">Mrs.</option>
+							<option value="Miss" data-bind="attr:{'checked':Salutation() == 'Miss'}">Miss</option>
+							<option value="Dr." data-bind="attr:{'checked':Salutation() == 'Dr.'}">Dr.</option>
+						</select>
+					</div>
+					
+					
+				<div data-bind="visible:foundEmail(),if:foundEmail()">
+					<input type="hidden" name="FORM_TOKEN" value="<?php echo $token;?>">
+					<input type="hidden" name="company_name1" data-bind="value:companyName">
+					<input type="hidden" name="company_name_confirmation1" data-bind="value:companyName">
+					<input type="hidden" name="companyExists" value="true">
+				</div>	
+
+				<div class="section section_1_tab" ><span>1</span></div>
+
+				<input type="hidden" name="user_type" data-bind="value:userType">
+
+
+				<section class="draw">
+						<!-- ko foreach: members-->						
+						<div>
+							Email:
+							<input type="text" data-bind="value:email">
+							Role:
+							<select id ="currency" name="currency"  data-bind="options: availableRoles,optionsText: $data,value: userRole" required></select>
+							<button class="btn btn-danger btn-xs" data-bind="click:deleteMe">Delete Member</button>
+						</div>
+						<hr>
+						<!-- /ko -->	
+
+						<div>
+								E-Mail
+								<input type="email" placeholder="type here" data-bind="textInput:newEmail">
+								<div  style="color: red;" data-bind="text:newEmail.errorMessage,visible:newEmail.error"></div>
+								<span style="color: red;" data-bind="text:mailErr"></span><br>
+								Role
+								<select id ="currency" name="currency"  data-bind="options: availableRoles,optionsText: $data,value: userRole" required></select>
+						</div>	
+						
+						
+						
+						<div class="form-group">
+							<label>Post Code/Zip<span style="color: #ff0000"><strong><sup>*</sup></strong></span></label>
+							<input type="text" name="zip2" id="zip2" data-bind="value:newPostCode" required>
+						</div>

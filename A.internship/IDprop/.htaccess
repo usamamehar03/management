@@ -1,0 +1,72 @@
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+</IfModule>
+RewriteEngine on 
+DirectoryIndex ProfilePortal.php
+
+SetEnvIf Request_URI ^.*$ ROOT_FOLDER=/A.internship/IDprop/
+RewriteRule ^home$ %{ENV:ROOT_FOLDER}/ProfilePortal.php [NC,L]
+RewriteRule ^Update$ %{ENV:ROOT_FOLDER}/ProfileUpdate.php [NC,L]
+RewriteRule ^View$ %{ENV:ROOT_FOLDER}/ProfileView.php [NC,L]
+RewriteRule ^Delete$ %{ENV:ROOT_FOLDER}/ProfileDelete.php [NC,L]
+RewriteRule ^FAQs$ %{ENV:ROOT_FOLDER}/ProfileFAQs.php [NC,L]
+RewriteRule ^Invite$ %{ENV:ROOT_FOLDER}/ProfileInvite.php [NC,L]
+RewriteRule ^logout$ %{ENV:ROOT_FOLDER}/logout.php [NC,L]
+RewriteRule ^contact$ %{ENV:ROOT_FOLDER}/contact.php [NC,L]
+RewriteRule ^privacy$ %{ENV:ROOT_FOLDER}/privacy.php [NC,L]
+RewriteRule ^legal$ %{ENV:ROOT_FOLDER}/legal.php [NC,L]
+RewriteRule ^disclaimer$ %{ENV:ROOT_FOLDER}/disclaimer.php [NC,L]
+RewriteRule ^cookies$ %{ENV:ROOT_FOLDER}/cookies.php [NC,L]
+RewriteRule ^footer$ %{ENV:ROOT_FOLDER}/footer.html [NC,L]
+RewriteRule ^AccessProfile$ %{ENV:ROOT_FOLDER}/AccessProfile.php [NC,L]
+RewriteRule ^AccessTenantFiles$ %{ENV:ROOT_FOLDER}/AccessTenantFiles.php [NC,L]
+RewriteRule ^Accounts$ %{ENV:ROOT_FOLDER}/Accounts.php [NC,L]
+RewriteRule ^AuditTrail$ %{ENV:ROOT_FOLDER}/AuditTrail.php [NC,L]
+RewriteRule ^CompanyDelete$ %{ENV:ROOT_FOLDER}/CompanyDelete.php [NC,L]
+RewriteRule ^Consent$ %{ENV:ROOT_FOLDER}/Consent.php [NC,L]
+RewriteRule ^CurrentOffers$ %{ENV:ROOT_FOLDER}/CurrentOffers.php [NC,L]
+RewriteRule ^dashboard$ %{ENV:ROOT_FOLDER}/dashboard.php [NC,L]
+RewriteRule ^LettingAgentOffice$ %{ENV:ROOT_FOLDER}/LettingAgentOffice.php [NC,L]
+RewriteRule ^KillSwitch$ %{ENV:ROOT_FOLDER}/KillSwitch.php [NC,L]
+RewriteRule ^ManagementReports$ %{ENV:ROOT_FOLDER}/ManagementReports.php [NC,L]
+RewriteRule ^ReferenceCheck$ %{ENV:ROOT_FOLDER}/ProfileReferenceCheck.php [NC,L]
+RewriteRule ^Tasks$ %{ENV:ROOT_FOLDER}/Tasks.php [NC,L]
+RewriteRule ^forms/EndClientDetails$ %{ENV:ROOT_FOLDER}/forms/EndClientDetails.php [NC,L]
+RewriteRule ^forms/HistoricalPayments$ %{ENV:ROOT_FOLDER}/forms/HistoricalPayments.php [NC,L]
+RewriteRule ^forms/Invoice$ %{ENV:ROOT_FOLDER}/forms/Invoice.php [NC,L]
+RewriteRule ^forms/InvoiceRecurring$ %{ENV:ROOT_FOLDER}/forms/InvoiceRecurring.php [NC,L]
+RewriteRule ^forms/InvoiceTemplate$ %{ENV:ROOT_FOLDER}/forms/InvoiceTemplate.php [NC,L]
+RewriteRule ^forms/Ledgers$ %{ENV:ROOT_FOLDER}/forms/Ledgers.php [NC,L]
+RewriteRule ^forms/LettingAgentRegistration$ %{ENV:ROOT_FOLDER}/forms/LettingAgentRegistration.php [NC,L]
+RewriteRule ^forms/LettingRegistration$ %{ENV:ROOT_FOLDER}/forms/LettingRegistration.php [NC,L]
+RewriteRule ^forms/MaintenanceOrders$ %{ENV:ROOT_FOLDER}/forms/MaintenanceOrders.php [NC,L]
+RewriteRule ^forms/PaymentRequest$ %{ENV:ROOT_FOLDER}/forms/PaymentRequest.php [NC,L]
+RewriteRule ^forms/Payments$ %{ENV:ROOT_FOLDER}/forms/Payments.php [NC,L]
+RewriteRule ^forms/PerformReferenceCheck$ %{ENV:ROOT_FOLDER}/forms/ReferenceCheck.php [NC,L]
+RewriteRule ^forms/Permissions$ %{ENV:ROOT_FOLDER}/forms/LettingAgentPermissions.php [NC,L]
+RewriteRule ^forms/Permissions$ %{ENV:ROOT_FOLDER}/forms/PropertyManagerPermissions.php [NC,L]
+RewriteRule ^forms/PropertyVacancies$ %{ENV:ROOT_FOLDER}/forms/PropertyVacancies.php [NC,L]
+RewriteRule ^forms/SupplierAvailability$ %{ENV:ROOT_FOLDER}/forms/SupplierAvailability.php [NC,L]
+RewriteRule ^forms/SupplierDetails$ %{ENV:ROOT_FOLDER}/forms/SupplierDetails.php [NC,L]
+RewriteRule ^forms/SupplierFees$ %{ENV:ROOT_FOLDER}/forms/SupplierFees.php [NC,L]
+RewriteRule ^forms/SupplierFeesApproval$ %{ENV:ROOT_FOLDER}/forms/SupplierFeesApproval.php [NC,L]
+RewriteRule ^forms/SupplierOrders$ %{ENV:ROOT_FOLDER}/forms/SupplierOrders.php [NC,L]
+RewriteRule ^forms/Teams$ %{ENV:ROOT_FOLDER}/forms/Teams.php [NC,L]
+RewriteRule ^forms/TeamMembers$ %{ENV:ROOT_FOLDER}/forms/TeamMembers.php [NC,L]
+RewriteRule ^forms/TenantEmploymentIncome$ %{ENV:ROOT_FOLDER}/forms/TenantEmploymentIncome.php [NC,L]
+RewriteRule ^forms/TenantFiles$ %{ENV:ROOT_FOLDER}/forms/TenantFiles.php [NC,L]
+RewriteRule ^forms/TenantLeads$ %{ENV:ROOT_FOLDER}/forms/TenantLeads.php [NC,L]
+RewriteRule ^forms/TenantOrders$ %{ENV:ROOT_FOLDER}/forms/TenantOrders.php [NC,L]
+RewriteRule ^forms/TenantPayments$ %{ENV:ROOT_FOLDER}/forms/TenantPayments.php [NC,L]
+RewriteRule ^forms/TenantCurrentLandlordReference$ %{ENV:ROOT_FOLDER}/forms/TenantCurrentLandlordReference.php [NC,L]
+RewriteRule ^forms/TenantGuarantor$ %{ENV:ROOT_FOLDER}/forms/TenantGuarantor.php [NC,L]
+RewriteRule ^forms/TenantRegistration$ %{ENV:ROOT_FOLDER}/forms/TenantRegistration.php [NC,L]
+RewriteRule ^forms/WorkOrderSummary$ %{ENV:ROOT_FOLDER}/forms/WorkOrderSummary.php [NC,L]
+RewriteRule ^pages/AssignEndClients$ %{ENV:ROOT_FOLDER}/pages/AssignTeamMembers.php [NC,L]
+RewriteRule ^pages/AddRentals$ %{ENV:ROOT_FOLDER}/pages/AddRentals.php [NC,L]
+
+
+
+

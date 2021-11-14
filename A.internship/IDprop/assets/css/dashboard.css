@@ -1,0 +1,28 @@
+table {
+	width:100%;
+}
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+th, td {
+	padding: 15px;
+	text-align: center;
+}
+table#t01 tr:nth-child(even) {
+	background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+	background-color: #fff;
+}
+table#t01 th {
+	background-color: #1b0b33;
+	color: white;
+}
+.box-test-form{width: 50%;margin:auto;-webkit-box-shadow: 0 1px 15px 1px rgba(62,57,107,.07);box-shadow: 0 1px 15px 1px rgba(62,57,107,.07);}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #211336;
+}
+a{color:#211336;  }
+a:hover{color:#211336;  }

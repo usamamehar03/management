@@ -1,0 +1,47 @@
+//add to model file
+function getpropertymanagmentid($userid)
+{
+	global $CONNECTION;
+	$out = FALSE;
+	$sql3= "SELECT PropertyManagementID.ID 
+	from LettingAgentID
+	INNER JOIN PropertyManagementID ON LettingAgentID.PropertyManagement_ID=PropertyManagementID.ID 
+	where LettingAgentID.User_ID=:userid and (LettingAgentID.UserRole='SeniorManagement' OR LettingAgentID.UserRole='Management' OR LettingAgentID.UserRole='PropertyManager' OR LettingAgentID.UserRole='AdminOps')";
+	$cq3 = $CONNECTION->prepare($sql3);
+	$cq3->bindValue(':userid',$userid);	
+	if( $cq3->execute() ){
+		$out = $cq3->fetchAll(\PDO::FETCH_ASSOC);
+		$out=($out!=null ? $out[0]['ID']:null);
+	}
+	return $out;
+}
+
+//add to controller file
+session_start();
+if( isset($_POST['act']) && ($_POST['act']=='getTenantOrdersView') ){
+	if(!userActions\validateToken($_POST['FORM_TOKEN'] ? $_POST['FORM_TOKEN'] : true)){
+		echo json_encode(['status'=>'err'],JSON_FORCE_OBJECT);
+		exit();
+	} 
+	$id=$_SESSION['userID'];
+	if($_SESSION['user_type'] == 'SeniorManagement' || 'Management' || 'PropertyManager' || 'AdminOps'){
+		$uid = Permissions\getTenantOrdersView($id);
+		$res = TenantOrdersView\getAllTenantOrdersView($uid);
+	}else{
+		$res = TenantOrdersView\getTenantOrdersView($id);
+	}
+	if( $res === NULL ){
+		echo json_encode(['status'=>'err'],JSON_FORCE_OBJECT);
+	}else if( $res ){
+		echo json_encode(['status'=>'ok','data'=>$res],JSON_FORCE_OBJECT);
+	}else{
+		echo json_encode(['status'=>'err'],JSON_FORCE_OBJECT);
+	}	
+}
+
+//add to View file lines 8-12
+$perms = userActions\computeAndLoadPerms();
+if($_SESSION['user_type'] != 'SeniorManagement' && $_SESSION['user_type'] !='Management' && $_SESSION['user_type'] !='Property Manager' && $_SESSION['user_type'] !='AdminOps'){
+	header("Location: ../noPerms.php");
+	die();
+}

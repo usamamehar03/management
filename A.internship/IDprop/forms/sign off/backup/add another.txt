@@ -1,0 +1,109 @@
+<div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="home-tab" data-bind="visible:currentTab() == 'View' ">
+				<br><br>
+				<div class="col-md col-md-8" style="margin: auto;">
+					<center data-bind="visible:offices().length == 0">
+						<h2>No offices listed</h2>
+					</center>
+					<!-- ko foreach: offices-->						
+					<div class="FaQ_Each">
+						<section class="box">
+							<span>
+								<i class="fa fa-plus" aria-hidden="true"></i>
+								<i class="fa fa-minus" id="other" aria-hidden="true"></i>
+							</span>
+							&nbsp;&nbsp;
+							<div class="section" style="display: inline-block;margin-left: 35px;" >
+								<a data-bind="text:FirstLine() + ' (' + City() + ')'"></a>
+							</div>
+							<?php if(($perms['DeleteOffice'])){ ?>
+								<button class="btn btn-danger btn-sm" data-bind="click:toggleDelete" style="float: right;margin-right: 10px;"><i class="fa fa-trash"></i> Delete</button>
+							<?php } ?>
+						</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+self.submit = function(){
+			var obj = $('.addOffice').serializeArray().reduce(function(a, x) { a[x.name] = x.value; return a; }, {});
+			$.post('actions/office.php', {
+				'act':'addOffice',
+				'iterator':self.iterator(),
+				'data':obj
+			}).done(function(data) {
+				if (data.status == 'ok') {
+					$.notify({
+						message: self.iterator() > 1 ? 'Offices added' : 'Office added' 
+					},{
+						type: 'primary',
+						delay: 2000,
+						timer: 2000,
+						showProgressbar: true,
+						animate: {
+							enter: 'animated bounceIn',
+							exit: 'animated bounceOut'
+						},
+						placement: {
+							from: "bottom",
+							align: "center"
+						}
+					});
+					$(".addOffice")[0].reset();
+				}else{
+				}
+			})
+			.fail(function () {
+			})
+		}
+		
+		
+		
+		
+		
+		self.iterator = ko.observable(1);
+		$(".addAnotherOffice").click(function (e) {
+			var sections = self.iterator();
+
+			e.preventDefault();
+			current_section = $(".section_"+sections);
+			html = current_section.html();
+			new_section_id = sections + 1;
+			current_section.after('<div class="section"><span>'+new_section_id+'</span></div><div class="inner-wrap section_'+new_section_id+'"></div>');
+
+			new_section = $(".section_"+new_section_id);
+
+			new_section.html(html);
+
+			new_section.find("label[for='address_"+sections+"']").attr("for","address_"+new_section_id);
+			new_section.find("#address_"+sections).attr("name","address_"+new_section_id);
+			new_section.find("#address_"+sections).attr("id","address_"+new_section_id);
+
+			new_section.find("label[for='city_"+sections+"']").attr("for","city_"+new_section_id);
+			new_section.find("#city_"+sections).attr("name","city_"+new_section_id);
+			new_section.find("#city_"+sections).attr("id","city_"+new_section_id);
+
+			new_section.find("label[for='county_"+sections+"']").attr("for","county_"+new_section_id);
+			new_section.find("#county_"+sections).attr("name","county_"+new_section_id);
+			new_section.find("#county_"+sections).attr("id","county_"+new_section_id);
+
+			new_section.find("label[for='code_"+sections+"']").attr("for","code_"+new_section_id);
+			new_section.find("#code_"+sections).attr("name","code_"+new_section_id);
+			new_section.find("#code_"+sections).attr("id","code_"+new_section_id);
+
+			new_section.find("label[for='countries_"+sections+"']").attr("for","countries_"+new_section_id);
+			new_section.find("#countries_"+sections).attr("name","countries_"+new_section_id);
+			new_section.find("#countries_"+sections).attr("id","countries_"+new_section_id);
+			self.iterator(self.iterator()+1);
+		});

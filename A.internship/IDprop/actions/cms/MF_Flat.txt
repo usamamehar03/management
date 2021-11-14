@@ -1,0 +1,42 @@
+function getManagementFeeFlat($userid)
+{
+	global $CONNECTION;
+	$out = FALSE;
+	$sql= " SELECT 	
+		SettingsDataID.User_ID AS userid, 
+		SettingsDataID.FeeType AS purpose,
+		SettingsDataID.Date,	
+		PropertyManagementVariableFeesID.ManagementFeeFlat AS amount		
+	 	FROM SettingsDataID	
+		INNER JOIN SettingsID ON SettingsDataID.Settings_ID=SettingsID.ID
+		INNER JOIN PropertyManagementID ON SettingsID.PropertyManagement_ID=PropertyManagementID.ID
+		INNER JOIN PropertyManagementVariableFeesID ON SettingsID.PropertyManagement_ID=PropertyManagementVariableFeesID.PropertyManagement_ID 	
+		INNER JOIN UserID ON SettingsDataID.User_ID=UserID.User_ID			
+		INNER JOIN PaymentClientID ON PropertyManagementID.ID=PaymentClientID.PropertyManagement_ID
+		WHERE SettingsDataID.FeeType='ManagementFeeFlat' AND (SettingsDataID.InvoiceCreated IS NULL)
+		AND (PropertyManagementVariableFeesID.User_ID IS NOT NULL)	
+		AND SettingsDataID.Settings_ID=PropertyManagementVariableFeesID.Settings_ID			
+		AND SettingsDataID.User_ID=:userid		
+		Group by SettingsDataID.ID	
+		";
+	$cq = $CONNECTION->prepare($sql);		
+	$cq->bindValue(':userid',$userid);		
+	if( $cq->execute() ){
+		$out = $cq->fetch(\PDO::FETCH_ASSOC);	
+	}
+else {
+	 	$arr = $cq->errorInfo();
+	 	$out['errors'] = "Errors:" . $arr[2]; 
+	  }
+	return $out;
+}
+ $res=getManagementFeeFlat(1000001352);   
+ foreach ($res as $key => $value)
+ {
+ 	print_r($value);
+ 	echo "</br>";
+ 	echo "</br>";
+ }	
+	echo "</br>";
+ 	echo "</br>";
+	echo "</br>";	

@@ -1,0 +1,55 @@
+function requestReferenceCheck($id){
+	global $CONNECTION;
+	$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+	require_once 'mailServerIDProp.php';
+	$q = "SELECT 
+	AES_DECRYPT(`ContactDetailsID`.`E-Mail`, '".$GLOBALS['encrypt_passphrase']."') AS `email`,
+	`PastEmployerID`.`User_ID`,
+	`JobRecordID`.`JobRecord_ID`
+	FROM `TenantID`
+	JOIN `JobRecordID` ON `TenantID`.`User_ID` = `JobRecordID`.`User_ID`
+	JOIN `JobTitleID` ON `JobTitleID`.`JobRecord_ID` = `JobRecordID`.`JobRecord_ID`
+	JOIN `PastEmployerID` ON `PastEmployerID`.`PastEmployer_ID` = `JobRecordID`.`PastEmployer_ID`
+	JOIN `ContactID` ON `JobTitleID`.`Contact_ID` = `ContactID`.`Contact_ID`
+	JOIN `ContactDetailsID` ON `JobTitleID`.`ContactDetails_ID` = `ContactDetailsID`.`ContactDetails_ID`
+	WHERE `TenantID`.`ID` = :user
+	AND `JobRecordID`.`VerifiedJob` = '0'
+	ORDER BY `JobRecordID`.`JobRecord_ID`,`ContactID`.`Contact_ID`,`JobRecordID`.`EndDate`
+	";
+	$cq = $CONNECTION->prepare($q);
+	$cq->bindValue(':user',$id);
+	$out = [];
+	if( $cq->execute() ){
+		$res = $cq->fetchAll(\PDO::FETCH_ASSOC);
+		foreach ($res as $key => $row) {
+			if($row['email'] && ($row['email'] != '')){
+				$access_token = bin2hex(openssl_random_pseudo_bytes(16));
+				$content = '<center><div><img src="https://www.prop.idcheck.tech/images/Prop_Logo.png"><br><h3> Notification from IDProp.</h3>
+				<h3>email content goes here.<br><br>
+				<a href="'.$actual_link.'/relevantPath?user='.$access_token.'"><button style="border-radius:5px;padding:5px;color:white;background:dodgerblue;">Continue</button></a>
+				</h3>
+				</div></center>';
+				sendEmail($row['email'],NULL,'Notification from IDProp',$content);
+				$sql3= "INSERT INTO `ReferenceRequestID` (`User_ID`,`RefRequestTimeStamp`,`refereeUserID`,`JobRecord_ID`,`accessToken`) VALUES (:id,NOW(),:user_id,:record_id,:access_token)";
+				$cq3 = $CONNECTION->prepare($sql3);
+				$cq3->bindValue(':id',$_SESSION['userID']);
+				$cq3->bindValue(':user_id',$row['User_ID']);
+				$cq3->bindValue(':record_id',$row['JobRecord_ID']);
+				$cq3->bindValue(':access_token',$access_token);
+				if( $cq3->execute() ){
+					$out = $lastid = $CONNECTION->lastInsertId();
+				}	
+			}
+		}
+		return $out;
+	}else{
+		return [];
+	}
+}
+
+//Here you can set this for your dir with env.php
+function sendEmailNotification($target,$id){
+	global $CONNECTION;
+	require_once sprintf('%s/../../_inc/env.php', __DIR__);
+	$actual_link = $GLOBALS['actual_link'];
+	require_once 'mailServer.php';

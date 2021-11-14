@@ -1,0 +1,13 @@
+function addMaintenanceSchedule($id, $data){
+	global $CONNECTION;
+	$out = FALSE;
+	$sql3= "INSERT INTO `MaintenanceScheduleID` (`SupplierOrders_ID`,`Status`)
+	VALUES (:supplierOrders_id,:status)";
+	$cq3 = $CONNECTION->prepare($sql3);
+	$cq3->bindValue(':supplierOrders_id',$id);
+	$cq3->bindValue(':status',$id);		
+	if( $cq3->execute() ){
+		$out = $lastid = $CONNECTION->lastInsertId();
+	}
+	return $out;
+}

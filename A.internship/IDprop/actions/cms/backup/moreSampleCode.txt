@@ -1,0 +1,182 @@
+function getLettingAgentByUserId($userId){
+	global $CONNECTION;
+	$out = FALSE;
+	$sql3= "SELECT `LettingAgentID`.* FROM `LettingAgentID` 
+	WHERE `LettingAgentID`.`User_ID` = :userId";
+	
+	$cq3 = $CONNECTION->prepare($sql3);
+	$cq3->bindValue(':userId',$userId);
+	if( $cq3->execute() ){
+		$out = $cq3->fetch(\PDO::FETCH_ASSOC);
+	}
+	return $out ? $out : false;
+}
+
+function searchPropertyID($postcode,$address){
+	global $CONNECTION;
+	$q = 'SELECT 
+	`PropertyID`.`FirstLine`,
+	`PropertyID`.`ID`,
+	`PropertyID`.`PostCode`
+	FROM `PropertyID`
+	WHERE AES_DECRYPT(`PropertyID`.`PostCode`, "'.$GLOBALS['encrypt_passphrase'].'") = :postcode
+	';
+	$cq = $CONNECTION->prepare($q);
+	$cq->bindValue(':postcode',$postcode);
+	if( $cq->execute() ){
+		$response = [];
+		$res = $cq->fetchAll(\PDO::FETCH_ASSOC);
+		$exists = NULL;
+		if($res){
+			foreach ($res as $row) {	
+				$addr = strtolower(\userActions\aes_decrypt($row['FirstLine']));
+				if( $addr == strtolower($address)){
+					return $row;
+				}
+			}
+		}
+	}
+	return null;
+}
+
+function checkEmailExists($email)
+{
+	global $CONNECTION;
+	$q = 'SELECT 
+	`TenantID`.`User_ID`
+	FROM `TenantID`
+	JOIN `ContactDetailsID` ON `TenantID`.`User_ID` = `ContactDetailsID`.`User_ID`
+	WHERE AES_DECRYPT(`ContactDetailsID`.`E-Mail`, "' . $GLOBALS['encrypt_passphrase'] . '") = :email
+	';
+	$cq = $CONNECTION->prepare($q);
+	$cq->bindValue(':email', $email);
+	if ($cq->execute()) {
+		$res = $cq->fetch(\PDO::FETCH_ASSOC);
+		return $res['User_ID'] ? 'exists' : 'notExists';
+	} else {
+		return null;
+	}
+}
+function checkLandlordExists($email)  //change this to "checkSupplierFees exist"
+
+
+{
+	global $CONNECTION;
+	$q = 'SELECT 
+	`PastLandlordID`.`User_ID`
+	FROM `PastLandlordID`
+	JOIN `ContactDetailsID` ON `PastLandlordID`.`User_ID` = `ContactDetailsID`.`User_ID`
+	WHERE AES_DECRYPT(`ContactDetailsID`.`E-Mail`, "' . $GLOBALS['encrypt_passphrase'] . '") = :email
+	';
+	$cq = $CONNECTION->prepare($q);
+	$cq->bindValue(':email', $email);
+	if ($cq->execute()) {
+		$res = $cq->fetch(\PDO::FETCH_ASSOC);
+		$_SESSION['past_landlord_id'] = $res['User_ID'];
+		return $res['User_ID'] ? 'exists' : 'notExists';
+	} else {
+		return null;
+	}
+}
+
+
+function searchLetOffers($email){
+	global $CONNECTION;
+	$q = 'SELECT
+	`LetOffersNewTenantID`.`LetOffers_ID`,
+	`LetOffersNewTenantID`.`ID`
+	FROM `LetOffersNewTenantID`
+	WHERE AES_DECRYPT(`LetOffersNewTenantID`.`TenantEmail`, "'.$GLOBALS['encrypt_passphrase'].'") = :email
+	';
+	$cq = $CONNECTION->prepare($q);
+	$cq->bindValue(':email',$email);
+	if( $cq->execute() ){
+		$res = $cq->fetch(\PDO::FETCH_ASSOC);
+		if($res){
+			return $res;
+		}
+	}else{
+		return FALSE;
+	}
+}
+
+
+
+function searchCompany($id,$companyName){
+	global $CONNECTION;
+	$out = FALSE;
+	$sql3= "SELECT
+	`LettingID`.`User_ID`
+	FROM `LettingID`
+	WHERE LOWER(AES_DECRYPT(`LettingID`.`CompanyName`, '".$GLOBALS['encrypt_passphrase']."')) = LOWER(:companyName)
+	";
+	$cq3 = $CONNECTION->prepare($sql3);
+	$cq3->bindValue(':companyName',$companyName);
+	if( $cq3->execute() ){
+		$out = $cq3->fetch(\PDO::FETCH_ASSOC);
+	}
+	return $out ? $out['User_ID'] : false;
+}
+
+
+function getUserIdFromEmail($email)
+{
+    global $CONNECTION;
+    $sql3=  "SELECT 
+    `User_ID`
+	FROM `CompanyTeams`
+	WHERE AES_DECRYPT(`CompanyTeams`.`teamManagerEmail`, '".$GLOBALS['encrypt_passphrase']."') = :email
+	";
+
+    $cq3 = $CONNECTION->prepare($sql3);
+    $cq3->bindValue(':email',$email);
+
+    if( $cq3->execute() ){
+        $out = $cq3->fetch(\PDO::FETCH_ASSOC);
+        return $out['User_ID'];
+    }
+    return false;
+}
+
+
+----------------------------------------
+ViewModel (but you can write this in jquery or php)
+
+We have a form which 1) tenant enters landlord's email 2) We check if the email is registered already
+3) If registered=yes we auto populate landlord details in the form 
+My suggestion is you 
+a) search: Is there a record for SuppierFees.SupplierID?
+b) If yes when supplier enters 2 or 3 fixed fees, don't enter another record into SupplierFees. 
+c) Repeat this search at each iteraction when you insert SupplierFees Form
+
+self.landlordExists = ko.observable(false);
+		self.landlordEmail = ko.observable(null);
+		self.landlordEmail.subscribe(function (newVal) {
+			checkLandlordExists(newVal)
+				.done(function (data) {
+					if (data == 'notExists') {
+						self.landlordExists(false);
+					} else {
+					
+					
+		function checkLandlordExists(email) {
+			var d = $.Deferred()
+			$.post('../actions/forms.php', {
+				'act': 'checkLandlordExists',
+				'email': email,
+        'FORM_TOKEN':FORM_TOKEN
+			}).done(function (data) {
+				if (data.status == 'ok') {
+					d.resolve(data.data ? data.data : []);
+				} else {
+					d.reject();
+				}
+			})
+				.fail(function () {
+					d.reject();
+				})
+			return d;
+		}
+
+
+	

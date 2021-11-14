@@ -1,0 +1,18 @@
+.footer_link
+{
+	font-size: 16px;
+	font-weight: 500;
+	color: darkgray;
+	margin-top: 65px;
+	float: right; 
+	padding-right: 10px;
+}
+.footer_link a
+{
+	color:darkgray;
+
+}
+.footer_link a:hover
+{
+	color:darkblue;
+}
